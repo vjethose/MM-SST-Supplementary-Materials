@@ -1,0 +1,48 @@
+{
+  "dataset": "SIM-D",
+  "description": "Urban District Energy Demand (50 buildings, daily, 5 years)",
+  "data_config": {
+    "n_buildings": 50,
+    "n_days": 1825,
+    "temporal_resolution": "daily",
+    "forecast_horizon": 7,
+    "lookback_window": 30,
+    "train_test_split": "70/15/15"
+  },
+  "model_config": {
+    "consumption_dim": 50,
+    "weather_dim": 3,
+    "contextual_dim": 2,
+    "embedding_dim": 32,
+    "fusion_dim": 64,
+    "patch_size": 7,
+    "num_transformer_layers": 2,
+    "n_heads": 4,
+    "ff_dim": 64,
+    "gat_heads": 2,
+    "dropout": 0.1
+  },
+  "training_config": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "pretrain_epochs": 8,
+    "finetune_epochs": 15,
+    "masking_ratio": 0.3,
+    "patience": 5,
+    "early_stopping": true,
+    "optimizer": "AdamW",
+    "scheduler": "CosineAnnealingLR"
+  },
+  "loss_config": {
+    "loss_type": "combined",
+    "mae_weight": 1.0,
+    "mse_weight": 0.1
+  },
+  "evaluation_metrics": [
+    "MAE",
+    "RMSE",
+    "MAPE"
+  ],
+  "random_seed": 42
+}
